@@ -1,0 +1,1097 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aleia Solutions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a0a0f;
+    --surface:#12121a;
+    --surface-2:#181822;
+    --border:#25252f;
+    --border-soft:#1c1c26;
+    --text:#f5f5f7;
+    --text-muted:#9a9aac;
+    --text-faint:#5f5f6e;
+    --blue:#3c83f6;
+    --purple:#895af6;
+    --grad: linear-gradient(135deg, var(--blue), var(--purple));
+    --grad-text: linear-gradient(90deg, var(--blue), var(--purple));
+    --accent-soft: rgba(60,131,246,.13);
+    --accent-border: rgba(60,131,246,.3);
+    --good:#3ddc97;
+    --font-display:'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-body:'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    color-scheme: dark;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--font-body);
+    -webkit-font-smoothing:antialiased;
+    padding:0 20px;
+  }
+  body::before{
+    content:"";
+    position:fixed; inset:0;
+    background:
+      radial-gradient(680px 420px at 82% -8%, rgba(137,90,246,.16), transparent 60%),
+      radial-gradient(560px 380px at 6% 8%, rgba(60,131,246,.12), transparent 60%);
+    pointer-events:none;
+    z-index:0;
+  }
+  .wrap{max-width:1180px; margin:0 auto; position:relative; z-index:1;}
+  h1,h2,h3{font-family:var(--font-display); text-wrap:balance; margin:0; line-height:1.08;}
+  p{line-height:1.65; margin:0;}
+  a{color:inherit; text-decoration:none;}
+  img,[style*="aspect-ratio"]{max-width:100%;}
+  ::selection{background:rgba(137,90,246,.35);}
+
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:8px;
+    font-size:12.5px; font-weight:700; letter-spacing:.09em; text-transform:uppercase;
+    color:var(--blue);
+  }
+  .eyebrow::before{content:""; width:6px; height:6px; border-radius:50%; background:var(--grad-text);}
+
+  .btn{
+    display:inline-flex; align-items:center; justify-content:center; gap:8px;
+    padding:13px 24px; border-radius:11px; font-weight:700; font-size:15px;
+    border:1px solid transparent; cursor:pointer; white-space:nowrap;
+    transition:transform .15s ease, filter .15s ease, background .15s ease, border-color .15s ease;
+    font-family:var(--font-body);
+  }
+  .btn:active{transform:translateY(1px);}
+  .btn-primary{background:var(--grad); color:#fff; box-shadow:0 8px 24px -10px rgba(90,100,246,.55);}
+  .btn-primary:hover{filter:brightness(1.08);}
+  .btn-ghost{background:var(--surface); color:var(--text); border-color:var(--border);}
+  .btn-ghost:hover{border-color:#3a3a48;}
+  .btn-block{width:100%;}
+
+  /* header */
+  header{
+    position:sticky; top:0; z-index:40;
+    background:rgba(10,10,15,.82); backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--border-soft);
+    margin:0 -20px;
+  }
+  .header-inner{max-width:1180px; margin:0 auto; padding:16px 20px; display:flex; align-items:center; justify-content:space-between; gap:20px;}
+  .logo{display:flex; align-items:center; gap:10px; font-weight:800; font-size:18px; letter-spacing:-.01em;}
+  .logo-mark{width:30px; height:30px; flex:none; object-fit:contain;}
+  nav.primary-nav{display:flex; align-items:center; gap:30px;}
+  .nav-links{display:flex; gap:28px; font-size:14.5px; font-weight:600; color:var(--text-muted);}
+  .nav-links a{padding:6px 0; border-bottom:2px solid transparent;}
+  .nav-links a:hover, .nav-links a.active{color:var(--text); border-color:var(--blue);}
+  .header-cta{display:flex; align-items:center; gap:14px;}
+  .menu-btn{display:none; background:none; border:1px solid var(--border); color:var(--text); width:40px; height:40px; border-radius:9px; align-items:center; justify-content:center;}
+  .mobile-nav{display:none; flex-direction:column; gap:2px; padding:10px 0 18px; border-top:1px solid var(--border-soft); margin-top:14px;}
+  .mobile-nav a{padding:11px 4px; font-weight:600; color:var(--text-muted); border-radius:8px;}
+  .mobile-nav a.active{color:var(--text);}
+  .mobile-nav.open{display:flex;}
+
+  section{padding-block:88px; position:relative; z-index:1;}
+  .section-head{max-width:640px; margin:0 0 44px;}
+  .section-head h2{font-size:clamp(28px,3.6vw,38px); font-weight:800; margin-top:10px;}
+  .section-head p{color:var(--text-muted); margin-top:14px; font-size:16.5px;}
+  .section-head.center{margin-inline:auto; text-align:center;}
+
+  /* hero */
+  .hero{padding-top:64px; padding-bottom:70px;}
+  .hero-grid{display:grid; grid-template-columns:1.05fr .95fr; gap:56px; align-items:center;}
+  .contact-grid{grid-template-columns:.85fr 1.15fr; align-items:start;}
+  .hero h1{font-size:clamp(38px,5.6vw,72px); font-weight:900; letter-spacing:-.02em;}
+  .hero h1 .grad{background:var(--grad-text); -webkit-background-clip:text; background-clip:text; color:transparent;}
+  .hero p.lead{color:var(--text-muted); font-size:18px; max-width:52ch; margin-top:20px;}
+  .hero-actions{display:flex; flex-wrap:wrap; gap:14px; margin-top:30px;}
+
+  .dash-card{background:var(--surface); border:1px solid var(--border); border-radius:18px; padding:22px; box-shadow:0 30px 60px -30px rgba(0,0,0,.6);}
+  .dash-head{display:flex; justify-content:space-between; align-items:flex-start; padding-bottom:18px; border-bottom:1px solid var(--border-soft); margin-bottom:18px;}
+  .dash-head .label{font-size:12.5px; color:var(--text-faint); text-transform:uppercase; letter-spacing:.06em;}
+  .dash-head .title{font-weight:700; margin-top:3px;}
+  .live-pill{display:flex; align-items:center; gap:6px; font-size:12.5px; color:var(--good); font-weight:700;}
+  .live-dot{width:7px; height:7px; border-radius:50%; background:var(--good); box-shadow:0 0 0 3px rgba(61,220,151,.2);}
+  .dash-metrics{display:flex; flex-direction:column; gap:12px;}
+  .metric-row{background:var(--surface-2); border:1px solid var(--border-soft); border-radius:12px; padding:14px 16px; display:flex; justify-content:space-between; align-items:center;}
+  .metric-row .m-label{font-size:12.5px; color:var(--text-muted);}
+  .metric-row .m-value{font-size:22px; font-weight:800; font-variant-numeric:tabular-nums; margin-top:2px;}
+  .metric-delta{font-size:12px; font-weight:700; color:var(--good); background:rgba(61,220,151,.12); padding:4px 9px; border-radius:999px;}
+  .eff-row{padding-top:4px;}
+  .eff-row .m-label{display:flex; justify-content:space-between; margin-bottom:8px;}
+  .eff-bar{height:7px; border-radius:999px; background:var(--surface-2); overflow:hidden;}
+  .eff-bar-fill{height:100%; width:87%; border-radius:999px; background:var(--grad-text);}
+
+  .stat-strip{display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--border-soft); border:1px solid var(--border-soft); border-radius:16px; overflow:hidden; margin-top:70px;}
+  .stat-cell{background:var(--surface); padding:26px 20px; text-align:center;}
+  .stat-cell .num{font-size:clamp(24px,3vw,32px); font-weight:900; font-variant-numeric:tabular-nums;}
+  .stat-cell .num span{background:var(--grad-text); -webkit-background-clip:text; background-clip:text; color:transparent;}
+  .stat-cell .cap{color:var(--text-muted); font-size:13px; margin-top:5px;}
+
+  /* generic card grids */
+  .grid-3{display:grid; grid-template-columns:repeat(3,1fr); gap:22px;}
+  .grid-2{display:grid; grid-template-columns:repeat(2,1fr); gap:22px;}
+  .card{background:var(--surface); border:1px solid var(--border); border-radius:16px; padding:26px;}
+  .card h3{font-size:18px; font-weight:700; margin-bottom:10px;}
+  .card p{color:var(--text-muted); font-size:14.5px;}
+  .card-icon{width:42px; height:42px; border-radius:11px; background:var(--accent-soft); display:flex; align-items:center; justify-content:center; margin-bottom:16px; color:var(--blue);}
+  .card-link{display:inline-flex; align-items:center; gap:6px; margin-top:16px; font-size:14px; font-weight:700; color:var(--blue);}
+
+  /* legal document */
+  .legal-doc h3{font-size:16.5px; margin:30px 0 10px;}
+  .legal-doc h3:first-child{margin-top:0;}
+  .legal-doc p{color:var(--text-muted); font-size:14.5px; margin-bottom:4px;}
+  .legal-doc ul{margin:10px 0 14px; padding-left:20px; color:var(--text-muted); font-size:14.5px; display:flex; flex-direction:column; gap:7px;}
+  .legal-doc a{color:var(--blue); text-decoration:underline;}
+  .legal-doc strong{color:var(--text); font-weight:600;}
+  .legal-crosslinks{display:flex; flex-wrap:wrap; gap:10px 22px; margin-top:34px; padding-top:22px; border-top:1px solid var(--border-soft);}
+  .legal-crosslinks a{font-size:13.5px; font-weight:600; color:var(--text-muted); text-decoration:none;}
+  .legal-crosslinks a:hover{color:var(--blue);}
+
+  .tech-strip{background:var(--surface); border:1px solid var(--border); border-radius:18px; padding:36px;}
+  .tech-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:16px;}
+  .tech-item{display:flex; align-items:center; gap:12px; background:var(--surface-2); border:1px solid var(--border-soft); border-radius:12px; padding:14px 16px;}
+  .tech-avatar{width:38px; height:38px; border-radius:9px; background:var(--grad); display:flex; align-items:center; justify-content:center; font-weight:800; font-size:14px; color:#fff; flex:none;}
+  .tech-item .t-name{font-weight:700; font-size:14px;}
+  .tech-item .t-cat{font-size:12px; color:var(--text-faint);}
+  .tech-more{text-align:center; margin-top:26px; font-size:14px; color:var(--text-muted);}
+  .tech-more b{color:var(--text); font-size:16px;}
+
+  .usecase-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:20px;}
+  .usecase{background:var(--surface); border:1px solid var(--border); border-radius:14px; padding:22px;}
+  .usecase h3{font-size:16px; margin-bottom:8px;}
+  .usecase p{font-size:14px; color:var(--text-muted);}
+
+  .why-grid{display:grid; grid-template-columns:1.1fr .9fr; gap:56px; align-items:start;}
+  .why-list{display:flex; flex-direction:column; gap:20px;}
+  .why-item{display:flex; gap:16px;}
+  .why-check{width:26px; height:26px; border-radius:8px; background:var(--accent-soft); color:var(--blue); display:flex; align-items:center; justify-content:center; flex:none; margin-top:2px;}
+  .why-item h3{font-size:15.5px; margin-bottom:4px;}
+  .why-item p{font-size:14px; color:var(--text-muted);}
+  .results-card{background:var(--surface); border:1px solid var(--border); border-radius:18px; padding:30px; position:sticky; top:100px;}
+  .results-card h3{font-size:13px; text-transform:uppercase; letter-spacing:.06em; color:var(--text-faint); margin-bottom:22px;}
+  .results-list{display:flex; flex-direction:column; gap:20px;}
+  .results-list .r-num{font-size:30px; font-weight:900; background:var(--grad-text); -webkit-background-clip:text; background-clip:text; color:transparent;}
+  .results-list .r-cap{font-size:13.5px; color:var(--text-muted); margin-top:2px;}
+
+  /* faq */
+  details.faq{background:var(--surface); border:1px solid var(--border); border-radius:13px; padding:2px 22px; margin-bottom:12px;}
+  details.faq summary{list-style:none; cursor:pointer; padding:19px 0; font-weight:700; font-size:15.5px; display:flex; justify-content:space-between; align-items:center; gap:16px;}
+  details.faq summary::-webkit-details-marker{display:none;}
+  details.faq summary::after{content:"+"; font-size:20px; font-weight:400; color:var(--text-faint); flex:none;}
+  details.faq[open] summary::after{content:"–";}
+  details.faq p{color:var(--text-muted); font-size:14.5px; padding-bottom:20px; max-width:70ch;}
+
+  /* story */
+  .story{background:var(--surface); border:1px solid var(--border); border-radius:20px; padding:36px; display:grid; grid-template-columns:.72fr 1.28fr; gap:44px; align-items:center;}
+  .story-photo-wrap{background:var(--surface-2); border:1px solid var(--border); border-radius:16px; padding:12px;}
+  .story-photo{width:100%; aspect-ratio:19/20; object-fit:cover; object-position:center top; border-radius:11px; display:block; background:#f4f2f0;}
+  .story-photo-caption{display:flex; justify-content:space-between; align-items:flex-end; gap:10px; padding:14px 4px 2px;}
+  .story-badge{display:inline-flex; align-items:center; gap:8px; background:var(--accent-soft); border:1px solid var(--accent-border); color:var(--blue); font-size:12.5px; font-weight:700; padding:7px 14px; border-radius:999px; margin-bottom:18px;}
+  .story blockquote{font-size:15.5px; color:var(--text-muted); margin:18px 0 0; padding-left:16px; border-left:2px solid var(--border);}
+  .story-quote{font-size:24px; font-weight:800; line-height:1.35;}
+  .story-person .p-name{font-weight:700; font-size:14.5px;}
+  .story-person .p-role{font-size:13px; color:var(--text-faint);}
+
+  /* steps */
+  .steps-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:22px;}
+  .step .step-num{font-size:13px; font-weight:800; color:var(--text-faint); font-variant-numeric:tabular-nums;}
+  .step h3{font-size:16.5px; margin:10px 0 8px;}
+  .step p{font-size:14px; color:var(--text-muted);}
+
+  /* form */
+  .form-shell{background:var(--surface); border:1px solid var(--border); border-radius:20px; padding:40px;}
+  .form-row{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
+  .field{display:flex; flex-direction:column; gap:7px; margin-bottom:16px;}
+  .field label{font-size:13px; font-weight:600; color:var(--text-muted);}
+  .field input, .field select, .field textarea{
+    background:var(--surface-2); border:1px solid var(--border); border-radius:10px;
+    padding:12px 14px; color:var(--text); font-size:14.5px; font-family:var(--font-body); width:100%;
+  }
+  .field input:focus, .field select:focus, .field textarea:focus{outline:2px solid var(--blue); outline-offset:1px; border-color:var(--blue);}
+  .field textarea{resize:vertical; min-height:96px;}
+
+  /* phone field with country-code selector */
+  .phone-field{display:flex; align-items:stretch; background:var(--surface-2); border:1px solid var(--border); border-radius:10px; position:relative;}
+  .phone-field:focus-within{outline:2px solid var(--blue); outline-offset:1px; border-color:var(--blue);}
+  .phone-code-btn{display:flex; align-items:center; gap:6px; flex:none; background:transparent; border:none; border-right:1px solid var(--border); padding:0 10px; color:var(--text); font-size:14px; font-family:var(--font-body); cursor:pointer; border-radius:10px 0 0 10px;}
+  .phone-code-btn:hover{background:rgba(255,255,255,.04);}
+  .phone-code-btn .flag{font-size:16px; line-height:1;}
+  .phone-code-btn .chev{color:var(--text-faint); font-size:9px; margin-left:1px;}
+  .phone-field input[type="tel"]{background:transparent; border:none; border-radius:0 10px 10px 0; padding:12px 14px 12px 10px; color:var(--text); font-size:14.5px; font-family:var(--font-body); width:100%; flex:1; min-width:0;}
+  .phone-field input[type="tel"]:focus{outline:none;}
+  .phone-dropdown{position:absolute; top:calc(100% + 6px); left:0; z-index:20; background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:6px; width:250px; max-height:260px; overflow-y:auto; box-shadow:0 20px 40px -14px rgba(0,0,0,.6);}
+  .phone-dropdown[hidden]{display:none;}
+  .phone-dropdown button{display:flex; align-items:center; gap:9px; width:100%; text-align:left; background:none; border:none; padding:8px 10px; border-radius:8px; color:var(--text); font-size:13.5px; font-family:var(--font-body); cursor:pointer;}
+  .phone-dropdown button:hover{background:var(--surface-2);}
+  .phone-dropdown .pd-code{margin-left:auto; color:var(--text-faint); font-size:12.5px; font-variant-numeric:tabular-nums;}
+
+  .chip-group{display:flex; flex-wrap:wrap; gap:9px;}
+  .chip{position:relative; border:1px solid var(--border); background:var(--surface-2); padding:9px 14px; border-radius:999px; font-size:13.5px; cursor:pointer; color:var(--text-muted);}
+  .chip input{position:absolute; opacity:0; pointer-events:none;}
+  .chip:has(input:checked){border-color:var(--blue); background:var(--accent-soft); color:var(--text);}
+  .form-note{font-size:12.5px; color:var(--text-faint); margin-top:14px; text-align:center;}
+  .info-card{background:var(--surface); border:1px solid var(--border); border-radius:18px; padding:28px; margin-bottom:20px;}
+  .info-card .i-row{display:flex; align-items:center; gap:12px; margin-bottom:14px; font-size:15px; font-weight:600;}
+  .info-card .i-icon{width:34px; height:34px; border-radius:9px; background:var(--accent-soft); color:var(--blue); display:flex; align-items:center; justify-content:center; flex:none;}
+
+  /* footer */
+  footer{border-top:1px solid var(--border-soft); padding:56px 0 30px; margin-top:40px;}
+  .footer-grid{display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr; gap:36px;}
+  .footer-brand p{color:var(--text-muted); font-size:14px; margin-top:14px; max-width:34ch;}
+  .footer-mail{margin-top:16px; font-size:14px; font-weight:600; color:var(--blue); display:inline-block;}
+  .footer-col h4{font-size:12.5px; text-transform:uppercase; letter-spacing:.06em; color:var(--text-faint); margin-bottom:16px;}
+  .footer-col ul{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:11px;}
+  .footer-col a{font-size:14px; color:var(--text-muted);}
+  .footer-col a:hover{color:var(--text);}
+  .footer-bottom{display:flex; justify-content:space-between; align-items:center; margin-top:48px; padding-top:22px; border-top:1px solid var(--border-soft); font-size:13px; color:var(--text-faint);}
+
+  .toast{position:fixed; left:50%; bottom:26px; transform:translate(-50%,140%); background:var(--surface); border:1px solid var(--border); color:var(--text); padding:14px 20px; border-radius:12px; font-size:14px; font-weight:600; box-shadow:0 20px 40px -14px rgba(0,0,0,.6); transition:transform .3s ease; z-index:100; max-width:min(90vw,380px); text-align:center;}
+  .toast.show{transform:translate(-50%,0);}
+
+  [data-page]{display:none;}
+  [data-page].active{display:block;}
+
+  @media (max-width:860px){
+    .hero-grid,.why-grid,.story,.form-row,.contact-grid{grid-template-columns:1fr;}
+    .grid-3,.grid-2,.usecase-grid,.steps-grid,.tech-grid{grid-template-columns:repeat(2,1fr);}
+    .stat-strip{grid-template-columns:repeat(2,1fr);}
+    .footer-grid{grid-template-columns:1fr 1fr;}
+    .results-card{position:static;}
+    .story{padding:30px;}
+  }
+  @media (max-width:620px){
+    .nav-links{display:none;}
+    .menu-btn{display:flex;}
+    .grid-3,.grid-2,.usecase-grid,.steps-grid,.tech-grid{grid-template-columns:1fr;}
+    .stat-strip{grid-template-columns:1fr 1fr;}
+    .footer-grid{grid-template-columns:1fr;}
+    section{padding-block:60px;}
+    .form-shell,.story{padding:24px;}
+    .header-cta .btn-primary span.full{display:none;}
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <a href="#/" class="logo" data-nav>
+      <img class="logo-mark" src="logo-icon.png" alt="Aleia Solutions">
+      Aleia Solutions
+    </a>
+    <nav class="primary-nav">
+      <div class="nav-links">
+        <a href="#/" data-nav>Inicio</a>
+        <a href="#/soluciones" data-nav>Soluciones</a>
+        <a href="https://drive.google.com/drive/folders/19gdZCWf6v5loN-hh5BF3eN9NM6mdCdJN?usp=sharing" target="_blank" rel="noopener noreferrer">Recursos gratuitos</a>
+        <a href="#/contacto" data-nav>Contacto</a>
+      </div>
+    </nav>
+    <div class="header-cta">
+      <a href="#/contacto" class="btn btn-primary" data-nav><span class="full">Solicita una </span>Demo</a>
+      <button class="menu-btn" id="menuBtn" aria-label="Abrir menú" aria-expanded="false">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="mobile-nav" id="mobileNav">
+      <a href="#/" data-nav>Inicio</a>
+      <a href="#/soluciones" data-nav>Soluciones</a>
+      <a href="#/contacto" data-nav>Recursos gratuitos</a>
+      <a href="#/contacto" data-nav>Contacto</a>
+    </div>
+  </div>
+</header>
+
+<!-- ================= INICIO ================= -->
+<main data-page="inicio" class="wrap">
+
+  <section class="hero">
+    <div class="hero-grid">
+      <div>
+        <span class="eyebrow">IA para empresas reales</span>
+        <h1 style="margin-top:16px;">Automatiza tu empresa.<br><span class="grad">Crece sin límites.</span></h1>
+        <p class="lead">Conectamos tus herramientas, eliminamos tareas repetitivas y desplegamos agentes de IA que trabajan por ti. Sin código, sin complicaciones, con resultados desde la primera semana.</p>
+        <div class="hero-actions">
+          <a href="#/contacto" class="btn btn-primary" data-nav>Solicita una Demo Gratis →</a>
+          <a href="#/soluciones" class="btn btn-ghost" data-nav>Ver Cómo Funciona</a>
+        </div>
+      </div>
+      <div class="dash-card">
+        <div class="dash-head">
+          <div>
+            <div class="label">Panel de automatización</div>
+            <div class="title">Aleia Dashboard</div>
+          </div>
+          <div class="live-pill"><span class="live-dot"></span>En vivo</div>
+        </div>
+        <div class="dash-metrics">
+          <div class="metric-row">
+            <div><div class="m-label">Horas ahorradas este mes</div><div class="m-value">487h</div></div>
+            <span class="metric-delta">+12%</span>
+          </div>
+          <div class="metric-row">
+            <div><div class="m-label">Procesos activos</div><div class="m-value">24</div></div>
+            <span class="metric-delta">+3 nuevos</span>
+          </div>
+          <div class="metric-row">
+            <div><div class="m-label">ROI acumulado</div><div class="m-value">3.2x</div></div>
+            <span class="metric-delta">+0.4x</span>
+          </div>
+          <div class="eff-row">
+            <div class="m-label"><span>Eficiencia operativa</span><span>87%</span></div>
+            <div class="eff-bar"><div class="eff-bar-fill"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="stat-strip">
+      <div class="stat-cell"><div class="num"><span class="stat-count" data-target="487">0</span>+</div><div class="cap">horas ahorradas al mes</div></div>
+      <div class="stat-cell"><div class="num"><span class="stat-count" data-target="98">0</span>%</div><div class="cap">satisfacción de clientes</div></div>
+      <div class="stat-cell"><div class="num"><span class="stat-count" data-target="3.2" data-decimal="1">0</span>x</div><div class="cap">más productividad</div></div>
+      <div class="stat-cell"><div class="num"><span class="stat-count" data-target="100">0</span>+</div><div class="cap">integraciones disponibles</div></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <span class="eyebrow">Qué hacemos</span>
+      <h2>Automatización inteligente, a tu medida</h2>
+      <p>No vendemos software genérico. Diseñamos sistemas que encajan exactamente en cómo trabaja tu empresa.</p>
+    </div>
+    <div class="grid-3">
+      <div class="card">
+        <div class="card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"/></svg></div>
+        <h3>Automatización a medida</h3>
+        <p>Analizamos tus procesos y construimos flujos automáticos que conectan tus herramientas y eliminan el trabajo manual repetitivo.</p>
+        <a href="#/soluciones" class="card-link" data-nav>Saber más →</a>
+      </div>
+      <div class="card">
+        <div class="card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="6" cy="6" r="3"/><circle cx="18" cy="18" r="3"/><path d="M9 6h6a3 3 0 0 1 3 3v0M15 18H9a3 3 0 0 1-3-3v0"/></svg></div>
+        <h3>Integración total</h3>
+        <p>Make, n8n, Zapier, APIs propias y cualquier software que ya uses. Lo conectamos todo para que tus datos fluyan sin fricciones.</p>
+        <a href="#/soluciones" class="card-link" data-nav>Ver integraciones →</a>
+      </div>
+      <div class="card">
+        <div class="card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="8" width="16" height="12" rx="2"/><path d="M8 8V6a4 4 0 0 1 8 0v2M9 13h.01M15 13h.01"/></svg></div>
+        <h3>Agentes IA inteligentes</h3>
+        <p>Desplegamos agentes que aprenden de tu negocio, responden a clientes, gestionan tareas y toman decisiones por ti.</p>
+        <a href="#/soluciones" class="card-link" data-nav>Ver demos →</a>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="why-grid">
+      <div>
+        <span class="eyebrow">Por qué elegirnos</span>
+        <h2 style="font-size:clamp(26px,3.2vw,34px); margin-top:10px;">Tu socio de confianza en automatización</h2>
+        <p style="color:var(--text-muted); margin-top:14px;">No somos una agencia más. Somos el equipo técnico que tu empresa necesita para dar el salto a la IA sin riesgos.</p>
+        <div class="why-list" style="margin-top:32px;">
+          <div class="why-item"><div class="why-check">✓</div><div><h3>Resultados desde la primera semana</h3><p>Primeros resultados visibles desde la instalación, sin interrumpir tu operativa actual.</p></div></div>
+          <div class="why-item"><div class="why-check">✓</div><div><h3>Sin código que mantener</h3><p>Nosotros gestionamos la infraestructura técnica. Tú te centras en tu negocio.</p></div></div>
+          <div class="why-item"><div class="why-check">✓</div><div><h3>Soporte continuo incluido</h3><p>Equipo disponible para ajustes, mejoras y nuevas automatizaciones cuando las necesites.</p></div></div>
+          <div class="why-item"><div class="why-check">✓</div><div><h3>Integración con tus sistemas</h3><p>Conectamos con el software que ya usas, sin migraciones ni cambios traumáticos.</p></div></div>
+          <div class="why-item"><div class="why-check">✓</div><div><h3>ROI medible desde la primera semana</h3><p>Definimos métricas claras antes de empezar y te mostramos el retorno real de cada automatización.</p></div></div>
+        </div>
+      </div>
+      <div class="results-card">
+        <h3>Resultados reales</h3>
+        <div class="results-list">
+          <div><div class="r-num">487h</div><div class="r-cap">ahorradas de media al mes</div></div>
+          <div><div class="r-num">3.2x</div><div class="r-cap">retorno sobre la inversión</div></div>
+          <div><div class="r-num">1 semana</div><div class="r-cap">hasta los primeros resultados</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <span class="eyebrow">Preguntas frecuentes</span>
+      <h2>Todo lo que necesitas saber</h2>
+      <p>Si tienes más dudas, escríbenos. Respondemos en menos de 24 horas.</p>
+    </div>
+    <div>
+      <details class="faq" open><summary>¿Cuánto tiempo tarda la implementación?</summary><p>La implementación tarda aproximadamente una semana. Si hay APIs externas que necesiten verificación por parte del proveedor, el plazo puede alargarse. Si todo está verificado, en 2 a 3 días tienes el sistema en producción.</p></details>
+      <details class="faq"><summary>¿Necesito conocimientos técnicos?</summary><p>No. Nos encargamos de toda la parte técnica. Solo necesitas explicarnos cómo funciona tu negocio y qué tareas quieres automatizar. Nosotros hacemos el resto.</p></details>
+      <details class="faq"><summary>¿Funciona con mi software actual?</summary><p>Casi con toda seguridad, sí. Trabajamos con más de 100 aplicaciones y plataformas: CRMs, ERPs, herramientas de comunicación, software de facturación, e-commerce y mucho más. Si tienes dudas sobre una herramienta específica, consúltanos.</p></details>
+      <details class="faq"><summary>¿Qué pasa si algo falla?</summary><p>Todos nuestros sistemas incluyen monitorización en tiempo real y alertas automáticas. Si algo falla, lo detectamos antes que tú y lo resolvemos. Además, diseñamos los flujos con mecanismos de fallback para que un error no detenga tu operativa.</p></details>
+      <details class="faq"><summary>¿El servicio incluye las licencias de los programas?</summary><p>No. Las licencias de cada herramienta o plataforma utilizada (Make, n8n, HubSpot, OpenAI, etc.) corren a cargo del cliente. Nosotros nos encargamos de la implementación, configuración y mantenimiento de las automatizaciones.</p></details>
+      <details class="faq"><summary>¿Cuál es el coste?</summary><p>Depende del alcance del proyecto. Ofrecemos desde automatizaciones puntuales hasta servicios de automatización continua con soporte mensual. La auditoría inicial es gratuita y sin compromiso, y en ella te damos una estimación detallada.</p></details>
+      <details class="faq"><summary>¿Existe el programa Kit Digital?</summary><p>Sí. El Kit Digital es un programa de ayudas del Gobierno de España que permite a pymes y autónomos financiar soluciones digitales con fondos europeos Next Generation EU. Para más información sobre cómo solicitarlo, visita la web oficial de Acelera Pyme.</p></details>
+    </div>
+  </section>
+
+  <section>
+    <div class="story">
+      <div>
+        <div class="story-photo-wrap">
+          <img class="story-photo" src="ceo-portrait_1.jpg" alt="Alejandra Páez, CEO y fundadora de Aleia Solutions">
+          <div class="story-photo-caption">
+            <div class="story-person"><div class="p-name">Alejandra Páez</div><div class="p-role">CEO y fundadora, Aleia Solutions</div></div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="story-badge">+600 leads/mes gestionados</div>
+        <p class="eyebrow" style="display:block; color:var(--text-faint);">Nuestra historia</p>
+        <p class="story-quote" style="margin-top:12px;">Creé Aleia Solutions porque yo misma lo necesitaba</p>
+        <blockquote>Llegué a gestionar aproximadamente 600 leads al mes, pero no podía expandir mi negocio porque invertía demasiado tiempo en responder mensajes y hacer seguimientos manualmente.</blockquote>
+        <blockquote>Por eso creé Aleia Solutions: para ayudar a empresas y negocios locales a automatizar sus procesos, aprovechar mejor sus leads y crecer con sistemas inteligentes.</blockquote>
+        <blockquote>Nuestro objetivo es que cada empresa tenga más tiempo para centrarse en lo importante, aumente su facturación y consiga mayores beneficios sin tener que hacerlo todo manualmente.</blockquote>
+      </div>
+    </div>
+  </section>
+
+  <section id="leadForm">
+    <div class="section-head center">
+      <span class="eyebrow">Empieza hoy</span>
+      <h2>¿Listo para automatizar tu empresa?</h2>
+      <p>Cuéntanos tu caso y te preparamos una auditoría gratuita con las automatizaciones que más impacto tendrían en tu negocio.</p>
+    </div>
+    <form class="form-shell" style="max-width:720px; margin:0 auto;" data-demo-form data-form-name="Formulario Inicio (auditoría gratuita)">
+      <div class="form-row">
+        <div class="field"><label for="h-name">Nombre *</label><input id="h-name" name="nombre" required placeholder="Tu nombre"></div>
+        <div class="field"><label for="h-company">Empresa</label><input id="h-company" name="empresa" placeholder="Nombre de tu empresa"></div>
+      </div>
+      <div class="form-row">
+        <div class="field"><label for="h-email">Email *</label><input id="h-email" name="email" type="email" required placeholder="tu@empresa.com"></div>
+        <div class="field">
+          <label for="h-phone">Teléfono</label>
+          <div class="phone-field" data-phone>
+            <button type="button" class="phone-code-btn" data-phone-toggle aria-haspopup="listbox" aria-expanded="false">
+              <span class="flag">🇪🇸</span><span class="code">+34</span><span class="chev">▾</span>
+            </button>
+            <input id="h-phone" name="telefono_numero" type="tel" placeholder="600 000 000">
+            <div class="phone-dropdown" data-phone-list role="listbox" hidden></div>
+          </div>
+        </div>
+      </div>
+      <div class="field">
+        <label>¿Qué te interesa más ahora mismo?</label>
+        <div class="chip-group">
+          <label class="chip"><input type="radio" name="interes" value="Dejar de perder leads">Dejar de perder leads</label>
+          <label class="chip"><input type="radio" name="interes" value="Automatizar el seguimiento">Automatizar el seguimiento</label>
+          <label class="chip"><input type="radio" name="interes" value="Un chatbot que hable como yo">Un chatbot que hable como yo</label>
+          <label class="chip"><input type="radio" name="interes" value="Recuperar clientes antiguos">Recuperar clientes antiguos</label>
+          <label class="chip"><input type="radio" name="interes" value="Aún no estoy seguro, quiero asesoría">Aún no estoy seguro, quiero asesoría</label>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="field"><label for="h-leads">Leads al mes (aprox.)</label>
+          <select id="h-leads" name="leads_al_mes"><option>Selecciona una opción</option><option>Menos de 50</option><option>50 – 100</option><option>100 – 500</option><option>500 – 1.000</option><option>1.000 – 1.500</option><option>1.500 o más</option></select>
+        </div>
+        <div class="field"><label for="h-type">Tipo de automatización</label>
+          <select id="h-type" name="tipo_automatizacion"><option>Selecciona una opción</option><option>Soporte al cliente</option><option>Ventas y CRM</option><option>Finanzas y facturación</option><option>Operaciones internas</option><option>No sé, necesito asesoramiento</option></select>
+        </div>
+      </div>
+      <div class="field"><label for="h-msg">Cuéntanos tu caso</label><textarea id="h-msg" name="mensaje" placeholder="Describe brevemente tu situación actual..."></textarea></div>
+      <button class="btn btn-primary btn-block" type="submit">Solicitar Auditoría Gratuita</button>
+      <p class="form-note">Al enviar este formulario aceptas nuestra <a href="#/privacidad" data-nav style="color:var(--blue); text-decoration:underline;">política de privacidad</a>. Tus datos no serán cedidos a terceros.</p>
+    </form>
+  </section>
+</main>
+
+<!-- ================= SOLUCIONES ================= -->
+<main data-page="soluciones" class="wrap">
+  <section class="hero" style="padding-bottom:20px;">
+    <span class="eyebrow">Nuestros servicios</span>
+    <h1 style="font-size:clamp(32px,4.6vw,50px); margin-top:14px; max-width:16ch;">Soluciones de automatización para cada empresa</h1>
+    <p class="lead" style="margin-top:18px;">Desde la primera automatización hasta un ecosistema completo de IA. Diseñamos, implementamos y mantenemos sistemas que trabajan por ti.</p>
+  </section>
+
+  <section style="padding-top:0;">
+    <div class="grid-2" style="grid-template-columns:1fr; gap:20px;">
+
+      <div class="card" style="display:grid; grid-template-columns:1.3fr 1fr; gap:34px; padding:34px;">
+        <div>
+          <span class="eyebrow">Elimina el trabajo manual repetitivo</span>
+          <h3 style="font-size:22px; margin-top:10px;">Automatización de procesos</h3>
+          <p style="margin-top:12px;">Analizamos en profundidad cómo trabaja tu empresa y construimos flujos automáticos que conectan tus herramientas, eliminan tareas manuales y reducen errores humanos. Cada automatización se diseña a medida para encajar exactamente en tu operativa.</p>
+          <div style="margin-top:20px; font-size:12.5px; font-weight:700; color:var(--text-faint); letter-spacing:.05em;">BENEFICIOS CLAVE</div>
+          <div class="why-list" style="margin-top:14px; gap:12px;">
+            <div class="why-item"><div class="why-check" style="width:20px;height:20px;font-size:12px;">✓</div><p style="font-size:14px;">Reducción de hasta el 80% en tareas manuales</p></div>
+            <div class="why-item"><div class="why-check" style="width:20px;height:20px;font-size:12px;">✓</div><p style="font-size:14px;">Cero errores por introducción manual de datos</p></div>
+            <div class="why-item"><div class="why-check" style="width:20px;height:20px;font-size:12px;">✓</div><p style="font-size:14px;">Procesos activos 24/7 sin intervención humana</p></div>
+            <div class="why-item"><div class="why-check" style="width:20px;height:20px;font-size:12px;">✓</div><p style="font-size:14px;">Escalabilidad sin aumentar el equipo</p></div>
+          </div>
+          <a href="#/contacto" class="btn btn-primary" data-nav style="margin-top:22px;">Solicitar información</a>
+        </div>
+        <div>
+          <div style="font-size:12.5px; font-weight:700; color:var(--text-faint); letter-spacing:.05em; margin-bottom:10px;">HERRAMIENTAS</div>
+          <div style="display:flex; flex-wrap:wrap; gap:8px; margin-bottom:22px;">
+            <span class="chip" style="cursor:default;">Make</span><span class="chip" style="cursor:default;">n8n</span><span class="chip" style="cursor:default;">Zapier</span><span class="chip" style="cursor:default;">APIs propias</span>
+          </div>
+          <div style="font-size:12.5px; font-weight:700; color:var(--text-faint); letter-spacing:.05em; margin-bottom:10px;">CASOS DE USO</div>
+          <ul style="margin:0; padding-left:18px; color:var(--text-muted); font-size:13.5px; display:flex; flex-direction:column; gap:8px;">
+            <li>Sincronización automática entre CRM, ERP y facturación</li>
+            <li>Generación y envío de informes periódicos</li>
+            <li>Gestión de pedidos y notificaciones a clientes</li>
+            <li>Onboarding automático de nuevos empleados</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card" style="display:grid; grid-template-columns:1.3fr 1fr; gap:34px; padding:34px;">
+        <div>
+          <span class="eyebrow">Conecta todas tus herramientas</span>
+          <h3 style="font-size:22px; margin-top:10px;">Integración de sistemas</h3>
+          <p style="margin-top:12px;">Hacemos que todos tus sistemas hablen entre sí. Conectamos CRMs, ERPs, plataformas de e-commerce, herramientas de comunicación y cualquier software que uses, para que los datos fluyan sin fricciones y sin duplicidades.</p>
+          <div style="margin-top:20px; font-size:12.5px; font-weight:700; color:var(--text-faint); letter-spacing:.05em;">BENEFICIOS CLAVE</div>
+          <div class="why-list" style="margin-top:14px; gap:12px;">
+            <div class="why-item"><div class="why-check" style="width:20px;height:20px;font-size:12px;">✓</div><p style="font-size:14px;">Datos siempre sincronizados entre sistemas</p></div>
+            <div class="why-item"><div class="why-check" style="width:20px;height:20px;font-size:12px;">✓</div><p style="font-size:14px;">Eliminación de doble introducción de datos</p></div>
+            <div class="why-item"><div class="why-check" style="width:20px;height:20px;font-size:12px;">✓</div><p style="font-size:14px;">Visibilidad total del negocio en tiempo real</p></div>
+            <div class="why-item"><div class="why-check" style="width:20px;height:20px;font-size:12px;">✓</div><p style="font-size:14px;">Reducción de costes operativos</p></div>
+          </div>
+          <a href="#/contacto" class="btn btn-primary" data-nav style="margin-top:22px;">Solicitar información</a>
+        </div>
+        <div>
+          <div style="font-size:12.5px; font-weight:700; color:var(--text-faint); letter-spacing:.05em; margin-bottom:10px;">HERRAMIENTAS</div>
+          <div style="display:flex; flex-wrap:wrap; gap:8px; margin-bottom:22px;">
+            <span class="chip" style="cursor:default;">HubSpot</span><span class="chip" style="cursor:default;">Salesforce</span><span class="chip" style="cursor:default;">Shopify</span><span class="chip" style="cursor:default;">Google Workspace</span><span class="chip" style="cursor:default;">WhatsApp Business</span>
+          </div>
+          <div style="font-size:12.5px; font-weight:700; color:var(--text-faint); letter-spacing:.05em; margin-bottom:10px;">CASOS DE USO</div>
+          <ul style="margin:0; padding-left:18px; color:var(--text-muted); font-size:13.5px; display:flex; flex-direction:column; gap:8px;">
+            <li>Integración CRM con herramientas de marketing</li>
+            <li>Sincronización de inventario entre tienda física y online</li>
+            <li>Conexión de plataformas de atención al cliente</li>
+            <li>Unificación de datos de ventas y finanzas</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card" style="display:grid; grid-template-columns:1.3fr 1fr; gap:34px; padding:34px;">
+        <div>
+          <span class="eyebrow">IA que trabaja por ti</span>
+          <h3 style="font-size:22px; margin-top:10px;">Agentes IA inteligentes</h3>
+          <p style="margin-top:12px;">Desplegamos agentes de inteligencia artificial entrenados con el conocimiento de tu empresa. Responden a clientes, analizan datos, toman decisiones y ejecutan tareas complejas de forma autónoma, aprendiendo y mejorando con el tiempo.</p>
+          <div style="margin-top:20px; font-size:12.5px; font-weight:700; color:var(--text-faint); letter-spacing:.05em;">BENEFICIOS CLAVE</div>
+          <div class="why-list" style="margin-top:14px; gap:12px;">
+            <div class="why-item"><div class="why-check" style="width:20px;height:20px;font-size:12px;">✓</div><p style="font-size:14px;">Atención al cliente 24/7 sin coste adicional</p></div>
+            <div class="why-item"><div class="why-check" style="width:20px;height:20px;font-size:12px;">✓</div><p style="font-size:14px;">Respuestas precisas basadas en tu documentación</p></div>
+            <div class="why-item"><div class="why-check" style="width:20px;height:20px;font-size:12px;">✓</div><p style="font-size:14px;">Escalado automático en momentos de alta demanda</p></div>
+            <div class="why-item"><div class="why-check" style="width:20px;height:20px;font-size:12px;">✓</div><p style="font-size:14px;">Aprendizaje continuo y mejora progresiva</p></div>
+          </div>
+          <a href="#/contacto" class="btn btn-primary" data-nav style="margin-top:22px;">Solicitar información</a>
+        </div>
+        <div>
+          <div style="font-size:12.5px; font-weight:700; color:var(--text-faint); letter-spacing:.05em; margin-bottom:10px;">HERRAMIENTAS</div>
+          <div style="display:flex; flex-wrap:wrap; gap:8px; margin-bottom:22px;">
+            <span class="chip" style="cursor:default;">OpenAI GPT-4</span><span class="chip" style="cursor:default;">Flowise</span><span class="chip" style="cursor:default;">LangChain</span><span class="chip" style="cursor:default;">Pinecone</span>
+          </div>
+          <div style="font-size:12.5px; font-weight:700; color:var(--text-faint); letter-spacing:.05em; margin-bottom:10px;">CASOS DE USO</div>
+          <ul style="margin:0; padding-left:18px; color:var(--text-muted); font-size:13.5px; display:flex; flex-direction:column; gap:8px;">
+            <li>Chatbot de soporte con acceso a base de conocimiento</li>
+            <li>Agente de ventas que cualifica leads automáticamente</li>
+            <li>Asistente interno para consultas de empleados</li>
+            <li>Análisis automático de documentos y contratos</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card" style="display:grid; grid-template-columns:1.3fr 1fr; gap:34px; padding:34px;">
+        <div>
+          <span class="eyebrow">Hoja de ruta hacia la IA</span>
+          <h3 style="font-size:22px; margin-top:10px;">Consultoría estratégica IA</h3>
+          <p style="margin-top:12px;">No todas las empresas están en el mismo punto de madurez digital. Te ayudamos a identificar qué automatizaciones tendrán mayor impacto en tu negocio, priorizamos las iniciativas y diseñamos una hoja de ruta realista y con ROI medible.</p>
+          <div style="margin-top:20px; font-size:12.5px; font-weight:700; color:var(--text-faint); letter-spacing:.05em;">BENEFICIOS CLAVE</div>
+          <div class="why-list" style="margin-top:14px; gap:12px;">
+            <div class="why-item"><div class="why-check" style="width:20px;height:20px;font-size:12px;">✓</div><p style="font-size:14px;">Diagnóstico completo de procesos automatizables</p></div>
+            <div class="why-item"><div class="why-check" style="width:20px;height:20px;font-size:12px;">✓</div><p style="font-size:14px;">Priorización por impacto y facilidad de implementación</p></div>
+            <div class="why-item"><div class="why-check" style="width:20px;height:20px;font-size:12px;">✓</div><p style="font-size:14px;">Estimación de ROI antes de invertir</p></div>
+            <div class="why-item"><div class="why-check" style="width:20px;height:20px;font-size:12px;">✓</div><p style="font-size:14px;">Acompañamiento durante toda la transformación</p></div>
+          </div>
+          <a href="#/contacto" class="btn btn-primary" data-nav style="margin-top:22px;">Solicitar información</a>
+        </div>
+        <div>
+          <div style="font-size:12.5px; font-weight:700; color:var(--text-faint); letter-spacing:.05em; margin-bottom:10px;">HERRAMIENTAS</div>
+          <div style="display:flex; flex-wrap:wrap; gap:8px; margin-bottom:22px;">
+            <span class="chip" style="cursor:default;">Análisis de procesos</span><span class="chip" style="cursor:default;">Mapeo de flujos</span><span class="chip" style="cursor:default;">Benchmarking sectorial</span>
+          </div>
+          <div style="font-size:12.5px; font-weight:700; color:var(--text-faint); letter-spacing:.05em; margin-bottom:10px;">CASOS DE USO</div>
+          <ul style="margin:0; padding-left:18px; color:var(--text-muted); font-size:13.5px; display:flex; flex-direction:column; gap:8px;">
+            <li>Auditoría de procesos y detección de ineficiencias</li>
+            <li>Plan de transformación digital a 12 meses</li>
+            <li>Evaluación y selección de tecnologías</li>
+            <li>Priorización de automatizaciones por impacto y ROI</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <span class="eyebrow">Cómo trabajamos</span>
+      <h2>De la idea a los resultados en una semana</h2>
+    </div>
+    <div class="steps-grid">
+      <div class="step"><div class="step-num">01</div><h3>Auditoría gratuita</h3><p>Analizamos tus procesos actuales, identificamos ineficiencias y calculamos el potencial de ahorro. Sin coste y sin compromiso.</p></div>
+      <div class="step"><div class="step-num">02</div><h3>Diseño a medida</h3><p>Diseñamos la arquitectura de automatización específica para tu empresa, seleccionando las herramientas más adecuadas.</p></div>
+      <div class="step"><div class="step-num">03</div><h3>Implementación</h3><p>Construimos e implementamos los flujos automatizados en aproximadamente una semana. Si hay APIs externas, el plazo puede variar; si todo está verificado, en 2 a 3 días.</p></div>
+      <div class="step"><div class="step-num">04</div><h3>Soporte continuo</h3><p>Monitorizamos, ajustamos y mejoramos continuamente. Estamos disponibles para nuevas automatizaciones cuando las necesites.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="card" style="text-align:center; padding:50px 30px; background:var(--surface);">
+      <h2 style="font-size:clamp(24px,3vw,32px);">¿Cuál es tu mayor ineficiencia?</h2>
+      <p style="color:var(--text-muted); margin-top:12px;">Cuéntanosla y te decimos cómo automatizarla. Auditoría gratuita, sin compromiso.</p>
+      <a href="#/contacto" class="btn btn-primary" data-nav style="margin-top:22px;">Solicitar auditoría gratuita</a>
+    </div>
+  </section>
+</main>
+
+<!-- ================= CONTACTO ================= -->
+<main data-page="contacto" class="wrap">
+  <section class="hero" style="padding-bottom:20px;">
+    <span class="eyebrow">Hablemos</span>
+    <h1 style="font-size:clamp(32px,4.6vw,50px); margin-top:14px; max-width:18ch;">Empieza tu transformación digital hoy</h1>
+    <p class="lead" style="margin-top:18px;">Cuéntanos tu caso y te preparamos una auditoría gratuita con las automatizaciones que más impacto tendrían en tu negocio. Sin compromiso.</p>
+  </section>
+
+  <section style="padding-top:10px;">
+    <div class="hero-grid contact-grid">
+      <div>
+        <div class="info-card">
+          <h3 style="font-size:13px; text-transform:uppercase; letter-spacing:.06em; color:var(--text-faint); margin-bottom:18px;">Información de contacto</h3>
+          <div class="i-row"><div class="i-icon">@</div>info@aleiasolutions.com</div>
+          <div class="i-row" style="margin-bottom:0;"><div class="i-icon">✆</div>+34 643 321 518</div>
+        </div>
+        <div class="info-card">
+          <h3 style="font-size:13px; text-transform:uppercase; letter-spacing:.06em; color:var(--text-faint); margin-bottom:18px;">¿Por qué contactarnos?</h3>
+          <div class="why-list" style="gap:14px;">
+            <div class="why-item"><div class="why-check" style="width:20px;height:20px;font-size:12px;">✓</div><p style="font-size:14px;">Auditoría gratuita y sin compromiso</p></div>
+            <div class="why-item"><div class="why-check" style="width:20px;height:20px;font-size:12px;">✓</div><p style="font-size:14px;">Respuesta en menos de 24 horas</p></div>
+            <div class="why-item"><div class="why-check" style="width:20px;height:20px;font-size:12px;">✓</div><p style="font-size:14px;">Presupuesto detallado y transparente</p></div>
+            <div class="why-item"><div class="why-check" style="width:20px;height:20px;font-size:12px;">✓</div><p style="font-size:14px;">Resultados desde la primera semana</p></div>
+            <div class="why-item"><div class="why-check" style="width:20px;height:20px;font-size:12px;">✓</div><p style="font-size:14px;">Implementación en 2-3 días si todo está verificado</p></div>
+          </div>
+        </div>
+      </div>
+
+      <form class="form-shell" data-demo-form data-form-name="Formulario Contacto (auditoría gratuita)">
+        <h3 style="font-size:19px; margin-bottom:4px;">Solicita tu auditoría gratuita</h3>
+        <p style="color:var(--text-muted); font-size:14px; margin-bottom:24px;">Respondemos en menos de 24 horas laborables.</p>
+        <div class="form-row">
+          <div class="field"><label for="c-name">Nombre y apellidos *</label><input id="c-name" name="nombre" required placeholder="Tu nombre completo"></div>
+          <div class="field"><label for="c-company">Empresa *</label><input id="c-company" name="empresa" required placeholder="Nombre de tu empresa"></div>
+        </div>
+        <div class="form-row">
+          <div class="field"><label for="c-email">Email profesional *</label><input id="c-email" name="email" type="email" required placeholder="tu@empresa.com"></div>
+          <div class="field">
+            <label for="c-phone">Teléfono</label>
+            <div class="phone-field" data-phone>
+              <button type="button" class="phone-code-btn" data-phone-toggle aria-haspopup="listbox" aria-expanded="false">
+                <span class="flag">🇪🇸</span><span class="code">+34</span><span class="chev">▾</span>
+              </button>
+              <input id="c-phone" name="telefono_numero" type="tel" placeholder="600 000 000">
+              <div class="phone-dropdown" data-phone-list role="listbox" hidden></div>
+            </div>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="field"><label for="c-size">Número de empleados</label>
+            <select id="c-size" name="numero_empleados"><option>Selecciona</option><option>1-2 empleados (autónomo/microempresa)</option><option>3-9 empleados</option><option>10-49 empleados</option><option>50 o más empleados</option></select>
+          </div>
+          <div class="field"><label for="c-topic">¿Qué quieres automatizar?</label>
+            <select id="c-topic" name="que_automatizar"><option>Selecciona</option><option>Soporte al cliente / chatbot</option><option>Ventas y CRM</option><option>Finanzas y facturación</option><option>Operaciones internas</option><option>Reporting y análisis</option><option>No sé, necesito asesoramiento</option></select>
+          </div>
+        </div>
+        <div class="field"><label for="c-msg">Cuéntanos tu caso</label><textarea id="c-msg" name="mensaje" placeholder="Describe brevemente tu situación actual..."></textarea></div>
+        <button class="btn btn-primary btn-block" type="submit">Solicitar auditoría gratuita</button>
+        <p class="form-note">Al enviar este formulario aceptas nuestra <a href="#/privacidad" data-nav style="color:var(--blue); text-decoration:underline;">política de privacidad</a>. Tus datos no serán cedidos a terceros.</p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<!-- ================= PRIVACIDAD ================= -->
+<main data-page="privacidad" class="wrap">
+  <section class="hero" style="padding-bottom:10px;">
+    <span class="eyebrow">Legal</span>
+    <h1 style="font-size:clamp(28px,4vw,42px); margin-top:14px;">Política de privacidad</h1>
+    <p class="lead" style="margin-top:14px; font-size:15px;">Última actualización: septiembre de 2026</p>
+  </section>
+
+  <section style="padding-top:10px;">
+    <div class="card legal-doc" style="max-width:800px; margin:0 auto; padding:40px;">
+
+      <h3>1. Responsable del tratamiento</h3>
+      <p>En cumplimiento del Reglamento (UE) 2016/679 (RGPD) y la Ley Orgánica 3/2018 (LOPDGDD), te informamos de que el responsable del tratamiento de tus datos personales es:</p>
+      <ul>
+        <li><strong>Denominación:</strong> Aleia Solutions</li>
+        <li><strong>Correo electrónico:</strong> <a href="mailto:info@aleiasolutions.com">info@aleiasolutions.com</a></li>
+        <li><strong>País:</strong> España</li>
+      </ul>
+
+      <h3>2. Datos que recogemos</h3>
+      <p>Podemos recoger los siguientes datos personales:</p>
+      <ul>
+        <li>Nombre y apellidos</li>
+        <li>Dirección de correo electrónico</li>
+        <li>Número de teléfono</li>
+        <li>Nombre de la empresa</li>
+        <li>Información que nos facilites voluntariamente a través de formularios de contacto</li>
+        <li>Datos de navegación (mediante cookies, con tu consentimiento previo)</li>
+      </ul>
+
+      <h3>3. Finalidad y base jurídica del tratamiento</h3>
+      <p>Tratamos tus datos para las siguientes finalidades:</p>
+      <ul>
+        <li>Gestión de solicitudes y consultas — base jurídica: ejecución de un contrato o medidas precontractuales (art. 6.1.b RGPD).</li>
+        <li>Envío de comunicaciones comerciales — base jurídica: consentimiento del interesado (art. 6.1.a RGPD). Puedes retirar tu consentimiento en cualquier momento.</li>
+        <li>Cumplimiento de obligaciones legales — base jurídica: obligación legal (art. 6.1.c RGPD).</li>
+      </ul>
+
+      <h3>4. Conservación de los datos</h3>
+      <p>Conservaremos tus datos durante el tiempo necesario para cumplir con la finalidad para la que fueron recogidos y, en todo caso, durante los plazos legalmente exigidos. Una vez cumplida la finalidad, los datos serán suprimidos o anonimizados.</p>
+
+      <h3>5. Destinatarios</h3>
+      <p>No cedemos tus datos a terceros salvo obligación legal o cuando sea estrictamente necesario para la prestación del servicio (p. ej., proveedores de servicios de correo electrónico o alojamiento web), quienes actúan como encargados del tratamiento bajo contrato de confidencialidad.</p>
+
+      <h3>6. Transferencias internacionales</h3>
+      <p>En caso de que algún proveedor esté ubicado fuera del Espacio Económico Europeo, nos aseguraremos de que existan garantías adecuadas conforme al RGPD (cláusulas contractuales tipo u otros mecanismos reconocidos).</p>
+
+      <h3>7. Tus derechos</h3>
+      <p>Puedes ejercer en cualquier momento los siguientes derechos enviando un correo a <a href="mailto:info@aleiasolutions.com">info@aleiasolutions.com</a>:</p>
+      <ul>
+        <li><strong>Acceso</strong> — conocer qué datos tratamos sobre ti.</li>
+        <li><strong>Rectificación</strong> — corregir datos inexactos o incompletos.</li>
+        <li><strong>Supresión</strong> — solicitar la eliminación de tus datos.</li>
+        <li><strong>Oposición</strong> — oponerte al tratamiento en determinadas circunstancias.</li>
+        <li><strong>Limitación</strong> — solicitar la restricción del tratamiento.</li>
+        <li><strong>Portabilidad</strong> — recibir tus datos en formato estructurado.</li>
+      </ul>
+      <p>Si consideras que el tratamiento no se ajusta a la normativa, puedes presentar una reclamación ante la Agencia Española de Protección de Datos (<a href="https://www.aepd.es" target="_blank" rel="noopener noreferrer">www.aepd.es</a>).</p>
+
+      <h3>8. Seguridad</h3>
+      <p>Aplicamos medidas técnicas y organizativas adecuadas para proteger tus datos frente a accesos no autorizados, pérdida o destrucción accidental.</p>
+
+      <h3>9. Cambios en esta política</h3>
+      <p>Podemos actualizar esta política periódicamente. Te notificaremos cualquier cambio relevante a través de nuestra web o por correo electrónico si dispusiéramos de él.</p>
+
+      <div class="legal-crosslinks">
+        <a href="#/aviso-legal" data-nav>Aviso legal</a>
+        <a href="#/cookies" data-nav>Política de cookies</a>
+      </div>
+      <a href="#/" data-nav class="btn btn-ghost" style="margin-top:20px;">← Volver al inicio</a>
+    </div>
+  </section>
+</main>
+
+<!-- ================= AVISO LEGAL ================= -->
+<main data-page="aviso-legal" class="wrap">
+  <section class="hero" style="padding-bottom:10px;">
+    <span class="eyebrow">Legal</span>
+    <h1 style="font-size:clamp(28px,4vw,42px); margin-top:14px;">Aviso legal</h1>
+    <p class="lead" style="margin-top:14px; font-size:15px;">Última actualización: septiembre de 2026</p>
+  </section>
+
+  <section style="padding-top:10px;">
+    <div class="card legal-doc" style="max-width:800px; margin:0 auto; padding:40px;">
+
+      <h3>1. Datos identificativos</h3>
+      <p>En cumplimiento de la Ley 34/2002, de 11 de julio, de Servicios de la Sociedad de la Información y de Comercio Electrónico (LSSI-CE), se informa:</p>
+      <ul>
+        <li><strong>Denominación:</strong> Aleia Solutions</li>
+        <li><strong>Correo electrónico:</strong> <a href="mailto:info@aleiasolutions.com">info@aleiasolutions.com</a></li>
+        <li><strong>País:</strong> España</li>
+      </ul>
+
+      <h3>2. Objeto y ámbito de aplicación</h3>
+      <p>El presente aviso legal regula el uso del sitio web aleiasolutions.com (en adelante, «el Sitio»). El acceso y uso del Sitio implica la aceptación plena de las presentes condiciones.</p>
+
+      <h3>3. Propiedad intelectual e industrial</h3>
+      <p>Todos los contenidos del Sitio —textos, imágenes, logotipos, gráficos, código fuente y demás elementos— son propiedad de Aleia Solutions o de sus licenciantes, y están protegidos por la legislación española e internacional sobre propiedad intelectual e industrial.</p>
+      <p>Queda prohibida su reproducción, distribución, comunicación pública o transformación sin autorización expresa y por escrito de Aleia Solutions.</p>
+
+      <h3>4. Condiciones de uso</h3>
+      <p>El usuario se compromete a hacer un uso lícito del Sitio y de sus contenidos.</p>
+      <ul>
+        <li>No realizar actividades que puedan dañar, inutilizar o deteriorar el Sitio o impedir su normal funcionamiento.</li>
+        <li>No introducir ni difundir contenidos ilícitos, dañinos o contrarios a la moral y al orden público.</li>
+      </ul>
+
+      <h3>5. Exclusión de responsabilidad</h3>
+      <p>Aleia Solutions no garantiza la disponibilidad continua del Sitio ni la ausencia de errores en sus contenidos. No será responsable de los daños derivados del uso del Sitio, de la imposibilidad de acceso o de la presencia de virus u otros elementos dañinos.</p>
+      <p>Los enlaces a sitios web de terceros se facilitan a título informativo. Aleia Solutions no controla ni se responsabiliza de sus contenidos.</p>
+
+      <h3>6. Legislación aplicable y jurisdicción</h3>
+      <p>Las presentes condiciones se rigen por la legislación española. Para la resolución de cualquier controversia, las partes se someten a los juzgados y tribunales del domicilio del usuario, salvo que la ley disponga otro fuero imperativo.</p>
+
+      <div class="legal-crosslinks">
+        <a href="#/privacidad" data-nav>Política de privacidad</a>
+        <a href="#/cookies" data-nav>Política de cookies</a>
+      </div>
+      <a href="#/" data-nav class="btn btn-ghost" style="margin-top:20px;">← Volver al inicio</a>
+    </div>
+  </section>
+</main>
+
+<!-- ================= COOKIES ================= -->
+<main data-page="cookies" class="wrap">
+  <section class="hero" style="padding-bottom:10px;">
+    <span class="eyebrow">Legal</span>
+    <h1 style="font-size:clamp(28px,4vw,42px); margin-top:14px;">Política de cookies</h1>
+    <p class="lead" style="margin-top:14px; font-size:15px;">Última actualización: septiembre de 2026</p>
+  </section>
+
+  <section style="padding-top:10px;">
+    <div class="card legal-doc" style="max-width:800px; margin:0 auto; padding:40px;">
+
+      <h3>1. ¿Qué son las cookies?</h3>
+      <p>Las cookies son pequeños archivos de texto que se almacenan en tu dispositivo cuando visitas un sitio web. Permiten que el sitio recuerde tus preferencias y mejore tu experiencia de navegación.</p>
+
+      <h3>2. Tipos de cookies que utilizamos</h3>
+      <ul>
+        <li><strong>Cookies técnicas (necesarias)</strong> — imprescindibles para el funcionamiento del Sitio. No requieren consentimiento.</li>
+        <li><strong>Cookies analíticas</strong> — nos permiten conocer cómo los usuarios interactúan con el Sitio (páginas visitadas, tiempo de permanencia, etc.) con el fin de mejorar nuestros servicios. Solo se activan con tu consentimiento.</li>
+        <li><strong>Cookies de preferencias</strong> — recuerdan tus elecciones (idioma, región, etc.) para ofrecerte una experiencia personalizada. Solo se activan con tu consentimiento.</li>
+      </ul>
+
+      <h3>3. Cookies de terceros</h3>
+      <p>Podemos utilizar servicios de terceros (como Google Analytics) que instalan sus propias cookies. Estos terceros tienen sus propias políticas de privacidad y cookies, sobre las que no tenemos control directo.</p>
+
+      <h3>4. Cómo gestionar las cookies</h3>
+      <p>Puedes configurar tu navegador para aceptar, rechazar o eliminar cookies en cualquier momento. Ten en cuenta que deshabilitar ciertas cookies puede afectar al funcionamiento del Sitio.</p>
+      <ul>
+        <li><strong>Chrome:</strong> Configuración → Privacidad y seguridad → Cookies.</li>
+        <li><strong>Firefox:</strong> Opciones → Privacidad y seguridad → Cookies.</li>
+        <li><strong>Safari:</strong> Preferencias → Privacidad → Cookies.</li>
+        <li><strong>Edge:</strong> Configuración → Privacidad, búsqueda y servicios → Cookies.</li>
+      </ul>
+
+      <h3>5. Consentimiento</h3>
+      <p>Al acceder al Sitio por primera vez, se te mostrará un aviso de cookies. Puedes aceptar todas las cookies, rechazar las no necesarias o personalizar tu elección. Puedes retirar tu consentimiento en cualquier momento contactando con nosotros en <a href="mailto:info@aleiasolutions.com">info@aleiasolutions.com</a>.</p>
+
+      <h3>6. Más información</h3>
+      <p>Para más información sobre cómo tratamos tus datos personales, consulta nuestra <a href="#/privacidad" data-nav>Política de privacidad</a>.</p>
+
+      <div class="legal-crosslinks">
+        <a href="#/privacidad" data-nav>Política de privacidad</a>
+        <a href="#/aviso-legal" data-nav>Aviso legal</a>
+      </div>
+      <a href="#/" data-nav class="btn btn-ghost" style="margin-top:20px;">← Volver al inicio</a>
+    </div>
+  </section>
+</main>
+
+<footer class="wrap">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="#/" class="logo" data-nav style="font-size:17px;">
+        <img class="logo-mark" src="logo-icon.png" alt="Aleia Solutions">
+        Aleia Solutions
+      </a>
+      <p>Automatizamos los procesos de tu empresa con inteligencia artificial. Más productividad, menos costes, resultados reales.</p>
+      <a href="mailto:info@aleiasolutions.com" class="footer-mail">info@aleiasolutions.com</a>
+    </div>
+    <div class="footer-col">
+      <h4>Servicios</h4>
+      <ul><li><a href="#/soluciones" data-nav>Automatización</a></li><li><a href="#/soluciones" data-nav>Agentes IA</a></li><li><a href="#/soluciones" data-nav>Integración de sistemas</a></li></ul>
+    </div>
+    <div class="footer-col">
+      <h4>Empresa</h4>
+      <ul><li><a href="#/contacto" data-nav>Recursos gratuitos</a></li><li><a href="#/contacto" data-nav>Contacto</a></li></ul>
+    </div>
+    <div class="footer-col">
+      <h4>Legal</h4>
+      <ul><li><a href="#/privacidad" data-nav>Política de privacidad</a></li><li><a href="#/aviso-legal" data-nav>Aviso legal</a></li><li><a href="#/cookies" data-nav>Cookies</a></li></ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Aleia Solutions. Todos los derechos reservados.</span>
+    <span>España</span>
+  </div>
+</footer>
+
+<div class="toast" id="toast">¡Gracias! Hemos recibido tu solicitud.</div>
+
+<script>
+  // ---- routing ----
+  const pages = document.querySelectorAll('[data-page]');
+  const navLinks = document.querySelectorAll('[data-nav]');
+
+  function routeTo(hash){
+    let path = (hash || '#/').replace('#','');
+    if(!path.startsWith('/')) path = '/' + path;
+    const name = path === '/' ? 'inicio' : path.replace('/','');
+    const target = document.querySelector('[data-page="'+name+'"]') ? name : 'inicio';
+    pages.forEach(p => p.classList.toggle('active', p.dataset.page === target));
+    navLinks.forEach(a => {
+      const aPath = a.getAttribute('href').replace('#','');
+      const aName = aPath === '/' ? 'inicio' : aPath.replace('/','');
+      a.classList.toggle('active', aName === target);
+    });
+    window.scrollTo({top:0, behavior:'instant' in window ? 'instant':'auto'});
+    document.getElementById('mobileNav').classList.remove('open');
+  }
+  window.addEventListener('hashchange', () => routeTo(location.hash));
+  routeTo(location.hash);
+
+  // ---- mobile menu ----
+  const menuBtn = document.getElementById('menuBtn');
+  const mobileNav = document.getElementById('mobileNav');
+  menuBtn.addEventListener('click', () => {
+    const open = mobileNav.classList.toggle('open');
+    menuBtn.setAttribute('aria-expanded', open);
+  });
+
+  // ---- demo form submit (sends an email via FormSubmit) ----
+  const toast = document.getElementById('toast');
+  const FORM_TARGET_EMAIL = 'info@aleiasolutions.com';
+  function showToast(msg){
+    toast.textContent = msg;
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 4200);
+  }
+  document.querySelectorAll('[data-demo-form]').forEach(f => {
+    f.addEventListener('submit', e => {
+      e.preventDefault();
+      if(!f.reportValidity()) return;
+
+      const submitBtn = f.querySelector('button[type="submit"]');
+      const originalText = submitBtn.textContent;
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Enviando...';
+
+      const data = {};
+      f.querySelectorAll('[name]').forEach(el => {
+        if(el.type === 'radio'){
+          if(el.checked) data[el.name] = el.value;
+        } else if(el.name) {
+          data[el.name] = el.value;
+        }
+      });
+      const phoneWrap = f.querySelector('[data-phone]');
+      if(phoneWrap){
+        const code = phoneWrap.querySelector('.code')?.textContent || '';
+        data.telefono = data.telefono_numero ? `${code} ${data.telefono_numero}` : '(no indicado)';
+        delete data.telefono_numero;
+      }
+      data._subject = f.dataset.formName || 'Nuevo lead desde la web - Aleia Solutions';
+      data._template = 'table';
+      data._captcha = 'false';
+
+      fetch(`https://formsubmit.co/ajax/${FORM_TARGET_EMAIL}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(data)
+      })
+        .then(res => res.ok ? res.json() : Promise.reject(res))
+        .then(() => {
+          showToast('¡Gracias! Hemos recibido tu solicitud, te contactaremos pronto.');
+          f.reset();
+        })
+        .catch(() => {
+          showToast(`No se pudo enviar. Escríbenos directamente a ${FORM_TARGET_EMAIL}`);
+        })
+        .finally(() => {
+          submitBtn.disabled = false;
+          submitBtn.textContent = originalText;
+        });
+    });
+  });
+
+  // ---- animated counters ----
+  const counters = document.querySelectorAll('.stat-count');
+  let counted = false;
+  function runCounters(){
+    if(counted) return; counted = true;
+    counters.forEach(el => {
+      const target = parseFloat(el.dataset.target);
+      const decimals = parseInt(el.dataset.decimal || '0', 10);
+      const dur = 1100, start = performance.now();
+      function tick(now){
+        const p = Math.min(1, (now - start) / dur);
+        const eased = 1 - Math.pow(1 - p, 3);
+        el.textContent = (target * eased).toFixed(decimals);
+        if(p < 1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    });
+  }
+  const strip = document.querySelector('.stat-strip');
+  if(strip){
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => { if(e.isIntersecting) runCounters(); });
+    }, {threshold:.4});
+    io.observe(strip);
+  }
+
+  // ---- phone country-code selector ----
+  const PHONE_COUNTRIES = [
+    {name:'España', flag:'🇪🇸', code:'+34'},
+    {name:'México', flag:'🇲🇽', code:'+52'},
+    {name:'Colombia', flag:'🇨🇴', code:'+57'},
+    {name:'Argentina', flag:'🇦🇷', code:'+54'},
+    {name:'Chile', flag:'🇨🇱', code:'+56'},
+    {name:'Perú', flag:'🇵🇪', code:'+51'},
+    {name:'Venezuela', flag:'🇻🇪', code:'+58'},
+    {name:'Ecuador', flag:'🇪🇨', code:'+593'},
+    {name:'Estados Unidos', flag:'🇺🇸', code:'+1'},
+    {name:'República Dominicana', flag:'🇩🇴', code:'+1'},
+    {name:'Guatemala', flag:'🇬🇹', code:'+502'},
+    {name:'Costa Rica', flag:'🇨🇷', code:'+506'},
+    {name:'Panamá', flag:'🇵🇦', code:'+507'},
+    {name:'Uruguay', flag:'🇺🇾', code:'+598'},
+    {name:'Paraguay', flag:'🇵🇾', code:'+595'},
+    {name:'Bolivia', flag:'🇧🇴', code:'+591'},
+    {name:'El Salvador', flag:'🇸🇻', code:'+503'},
+    {name:'Honduras', flag:'🇭🇳', code:'+504'},
+    {name:'Nicaragua', flag:'🇳🇮', code:'+505'},
+    {name:'Puerto Rico', flag:'🇵🇷', code:'+1'},
+    {name:'Portugal', flag:'🇵🇹', code:'+351'},
+    {name:'Francia', flag:'🇫🇷', code:'+33'},
+    {name:'Italia', flag:'🇮🇹', code:'+39'},
+    {name:'Alemania', flag:'🇩🇪', code:'+49'},
+    {name:'Reino Unido', flag:'🇬🇧', code:'+44'},
+    {name:'Brasil', flag:'🇧🇷', code:'+55'},
+  ];
+
+  function initPhoneFields(){
+    document.querySelectorAll('[data-phone]').forEach(wrap => {
+      const btn = wrap.querySelector('[data-phone-toggle]');
+      const list = wrap.querySelector('[data-phone-list]');
+      const flagEl = btn.querySelector('.flag');
+      const codeEl = btn.querySelector('.code');
+      list.innerHTML = PHONE_COUNTRIES.map(c =>
+        `<button type="button" data-flag="${c.flag}" data-code="${c.code}">${c.flag} ${c.name} <span class="pd-code">${c.code}</span></button>`
+      ).join('');
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isOpen = !list.hidden;
+        document.querySelectorAll('.phone-dropdown').forEach(d => d.hidden = true);
+        list.hidden = isOpen;
+        btn.setAttribute('aria-expanded', String(!isOpen));
+      });
+      list.addEventListener('click', (e) => {
+        const opt = e.target.closest('button[data-code]');
+        if(!opt) return;
+        flagEl.textContent = opt.dataset.flag;
+        codeEl.textContent = opt.dataset.code;
+        list.hidden = true;
+        btn.setAttribute('aria-expanded', 'false');
+      });
+    });
+    document.addEventListener('click', () => {
+      document.querySelectorAll('.phone-dropdown').forEach(d => d.hidden = true);
+    });
+  }
+  initPhoneFields();
+</script>
+
+</body>
+</html>
