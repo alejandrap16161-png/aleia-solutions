@@ -495,20 +495,20 @@
       <h2>¿Listo para automatizar tu empresa?</h2>
       <p>Cuéntanos tu caso y te preparamos una auditoría gratuita con las automatizaciones que más impacto tendrían en tu negocio.</p>
     </div>
-    <form class="form-shell" style="max-width:720px; margin:0 auto;" data-demo-form>
+    <form class="form-shell" style="max-width:720px; margin:0 auto;" data-demo-form data-form-name="Formulario Inicio (auditoría gratuita)">
       <div class="form-row">
-        <div class="field"><label for="h-name">Nombre *</label><input id="h-name" required placeholder="Tu nombre"></div>
-        <div class="field"><label for="h-company">Empresa</label><input id="h-company" placeholder="Nombre de tu empresa"></div>
+        <div class="field"><label for="h-name">Nombre *</label><input id="h-name" name="nombre" required placeholder="Tu nombre"></div>
+        <div class="field"><label for="h-company">Empresa</label><input id="h-company" name="empresa" placeholder="Nombre de tu empresa"></div>
       </div>
       <div class="form-row">
-        <div class="field"><label for="h-email">Email *</label><input id="h-email" type="email" required placeholder="tu@empresa.com"></div>
+        <div class="field"><label for="h-email">Email *</label><input id="h-email" name="email" type="email" required placeholder="tu@empresa.com"></div>
         <div class="field">
           <label for="h-phone">Teléfono</label>
           <div class="phone-field" data-phone>
             <button type="button" class="phone-code-btn" data-phone-toggle aria-haspopup="listbox" aria-expanded="false">
               <span class="flag">🇪🇸</span><span class="code">+34</span><span class="chev">▾</span>
             </button>
-            <input id="h-phone" type="tel" placeholder="600 000 000">
+            <input id="h-phone" name="telefono_numero" type="tel" placeholder="600 000 000">
             <div class="phone-dropdown" data-phone-list role="listbox" hidden></div>
           </div>
         </div>
@@ -516,22 +516,22 @@
       <div class="field">
         <label>¿Qué te interesa más ahora mismo?</label>
         <div class="chip-group">
-          <label class="chip"><input type="radio" name="interest">Dejar de perder leads</label>
-          <label class="chip"><input type="radio" name="interest">Automatizar el seguimiento</label>
-          <label class="chip"><input type="radio" name="interest">Un chatbot que hable como yo</label>
-          <label class="chip"><input type="radio" name="interest">Recuperar clientes antiguos</label>
-          <label class="chip"><input type="radio" name="interest">Aún no estoy seguro, quiero asesoría</label>
+          <label class="chip"><input type="radio" name="interes" value="Dejar de perder leads">Dejar de perder leads</label>
+          <label class="chip"><input type="radio" name="interes" value="Automatizar el seguimiento">Automatizar el seguimiento</label>
+          <label class="chip"><input type="radio" name="interes" value="Un chatbot que hable como yo">Un chatbot que hable como yo</label>
+          <label class="chip"><input type="radio" name="interes" value="Recuperar clientes antiguos">Recuperar clientes antiguos</label>
+          <label class="chip"><input type="radio" name="interes" value="Aún no estoy seguro, quiero asesoría">Aún no estoy seguro, quiero asesoría</label>
         </div>
       </div>
       <div class="form-row">
         <div class="field"><label for="h-leads">Leads al mes (aprox.)</label>
-          <select id="h-leads"><option>Selecciona una opción</option><option>Menos de 50</option><option>50 – 100</option><option>100 – 500</option><option>500 – 1.000</option><option>1.000 – 1.500</option><option>1.500 o más</option></select>
+          <select id="h-leads" name="leads_al_mes"><option>Selecciona una opción</option><option>Menos de 50</option><option>50 – 100</option><option>100 – 500</option><option>500 – 1.000</option><option>1.000 – 1.500</option><option>1.500 o más</option></select>
         </div>
         <div class="field"><label for="h-type">Tipo de automatización</label>
-          <select id="h-type"><option>Selecciona una opción</option><option>Soporte al cliente</option><option>Ventas y CRM</option><option>Finanzas y facturación</option><option>Operaciones internas</option><option>No sé, necesito asesoramiento</option></select>
+          <select id="h-type" name="tipo_automatizacion"><option>Selecciona una opción</option><option>Soporte al cliente</option><option>Ventas y CRM</option><option>Finanzas y facturación</option><option>Operaciones internas</option><option>No sé, necesito asesoramiento</option></select>
         </div>
       </div>
-      <div class="field"><label for="h-msg">Cuéntanos tu caso</label><textarea id="h-msg" placeholder="Describe brevemente tu situación actual..."></textarea></div>
+      <div class="field"><label for="h-msg">Cuéntanos tu caso</label><textarea id="h-msg" name="mensaje" placeholder="Describe brevemente tu situación actual..."></textarea></div>
       <button class="btn btn-primary btn-block" type="submit">Solicitar Auditoría Gratuita</button>
       <p class="form-note">Al enviar este formulario aceptas nuestra <a href="#/privacidad" data-nav style="color:var(--blue); text-decoration:underline;">política de privacidad</a>. Tus datos no serán cedidos a terceros.</p>
     </form>
@@ -718,35 +718,35 @@
         </div>
       </div>
 
-      <form class="form-shell" data-demo-form>
+      <form class="form-shell" data-demo-form data-form-name="Formulario Contacto (auditoría gratuita)">
         <h3 style="font-size:19px; margin-bottom:4px;">Solicita tu auditoría gratuita</h3>
         <p style="color:var(--text-muted); font-size:14px; margin-bottom:24px;">Respondemos en menos de 24 horas laborables.</p>
         <div class="form-row">
-          <div class="field"><label for="c-name">Nombre y apellidos *</label><input id="c-name" required placeholder="Tu nombre completo"></div>
-          <div class="field"><label for="c-company">Empresa *</label><input id="c-company" required placeholder="Nombre de tu empresa"></div>
+          <div class="field"><label for="c-name">Nombre y apellidos *</label><input id="c-name" name="nombre" required placeholder="Tu nombre completo"></div>
+          <div class="field"><label for="c-company">Empresa *</label><input id="c-company" name="empresa" required placeholder="Nombre de tu empresa"></div>
         </div>
         <div class="form-row">
-          <div class="field"><label for="c-email">Email profesional *</label><input id="c-email" type="email" required placeholder="tu@empresa.com"></div>
+          <div class="field"><label for="c-email">Email profesional *</label><input id="c-email" name="email" type="email" required placeholder="tu@empresa.com"></div>
           <div class="field">
             <label for="c-phone">Teléfono</label>
             <div class="phone-field" data-phone>
               <button type="button" class="phone-code-btn" data-phone-toggle aria-haspopup="listbox" aria-expanded="false">
                 <span class="flag">🇪🇸</span><span class="code">+34</span><span class="chev">▾</span>
               </button>
-              <input id="c-phone" type="tel" placeholder="600 000 000">
+              <input id="c-phone" name="telefono_numero" type="tel" placeholder="600 000 000">
               <div class="phone-dropdown" data-phone-list role="listbox" hidden></div>
             </div>
           </div>
         </div>
         <div class="form-row">
           <div class="field"><label for="c-size">Número de empleados</label>
-            <select id="c-size"><option>Selecciona</option><option>1-2 empleados (autónomo/microempresa)</option><option>3-9 empleados</option><option>10-49 empleados</option><option>50 o más empleados</option></select>
+            <select id="c-size" name="numero_empleados"><option>Selecciona</option><option>1-2 empleados (autónomo/microempresa)</option><option>3-9 empleados</option><option>10-49 empleados</option><option>50 o más empleados</option></select>
           </div>
           <div class="field"><label for="c-topic">¿Qué quieres automatizar?</label>
-            <select id="c-topic"><option>Selecciona</option><option>Soporte al cliente / chatbot</option><option>Ventas y CRM</option><option>Finanzas y facturación</option><option>Operaciones internas</option><option>Reporting y análisis</option><option>No sé, necesito asesoramiento</option></select>
+            <select id="c-topic" name="que_automatizar"><option>Selecciona</option><option>Soporte al cliente / chatbot</option><option>Ventas y CRM</option><option>Finanzas y facturación</option><option>Operaciones internas</option><option>Reporting y análisis</option><option>No sé, necesito asesoramiento</option></select>
           </div>
         </div>
-        <div class="field"><label for="c-msg">Cuéntanos tu caso</label><textarea id="c-msg" placeholder="Describe brevemente tu situación actual..."></textarea></div>
+        <div class="field"><label for="c-msg">Cuéntanos tu caso</label><textarea id="c-msg" name="mensaje" placeholder="Describe brevemente tu situación actual..."></textarea></div>
         <button class="btn btn-primary btn-block" type="submit">Solicitar auditoría gratuita</button>
         <p class="form-note">Al enviar este formulario aceptas nuestra <a href="#/privacidad" data-nav style="color:var(--blue); text-decoration:underline;">política de privacidad</a>. Tus datos no serán cedidos a terceros.</p>
       </form>
@@ -954,7 +954,7 @@
   </div>
 </footer>
 
-<div class="toast" id="toast">Esto es una réplica de maqueta — el formulario no envía datos.</div>
+<div class="toast" id="toast">¡Gracias! Hemos recibido tu solicitud.</div>
 
 <script>
   // ---- routing ----
@@ -986,13 +986,59 @@
     menuBtn.setAttribute('aria-expanded', open);
   });
 
-  // ---- demo form toast ----
+  // ---- demo form submit (sends an email via FormSubmit) ----
   const toast = document.getElementById('toast');
+  const FORM_TARGET_EMAIL = 'info@aleiasolutions.com';
+  function showToast(msg){
+    toast.textContent = msg;
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 4200);
+  }
   document.querySelectorAll('[data-demo-form]').forEach(f => {
     f.addEventListener('submit', e => {
       e.preventDefault();
-      toast.classList.add('show');
-      setTimeout(() => toast.classList.remove('show'), 3200);
+      if(!f.reportValidity()) return;
+
+      const submitBtn = f.querySelector('button[type="submit"]');
+      const originalText = submitBtn.textContent;
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Enviando...';
+
+      const data = {};
+      f.querySelectorAll('[name]').forEach(el => {
+        if(el.type === 'radio'){
+          if(el.checked) data[el.name] = el.value;
+        } else if(el.name) {
+          data[el.name] = el.value;
+        }
+      });
+      const phoneWrap = f.querySelector('[data-phone]');
+      if(phoneWrap){
+        const code = phoneWrap.querySelector('.code')?.textContent || '';
+        data.telefono = data.telefono_numero ? `${code} ${data.telefono_numero}` : '(no indicado)';
+        delete data.telefono_numero;
+      }
+      data._subject = f.dataset.formName || 'Nuevo lead desde la web - Aleia Solutions';
+      data._template = 'table';
+      data._captcha = 'false';
+
+      fetch(`https://formsubmit.co/ajax/${FORM_TARGET_EMAIL}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(data)
+      })
+        .then(res => res.ok ? res.json() : Promise.reject(res))
+        .then(() => {
+          showToast('¡Gracias! Hemos recibido tu solicitud, te contactaremos pronto.');
+          f.reset();
+        })
+        .catch(() => {
+          showToast(`No se pudo enviar. Escríbenos directamente a ${FORM_TARGET_EMAIL}`);
+        })
+        .finally(() => {
+          submitBtn.disabled = false;
+          submitBtn.textContent = originalText;
+        });
     });
   });
 
