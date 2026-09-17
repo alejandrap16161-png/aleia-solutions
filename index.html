@@ -255,6 +255,21 @@
   .toast{position:fixed; left:50%; bottom:26px; transform:translate(-50%,140%); background:var(--surface); border:1px solid var(--border); color:var(--text); padding:14px 20px; border-radius:12px; font-size:14px; font-weight:600; box-shadow:0 20px 40px -14px rgba(0,0,0,.6); transition:transform .3s ease; z-index:100; max-width:min(90vw,380px); text-align:center;}
   .toast.show{transform:translate(-50%,0);}
 
+  .wa-float{
+    position:fixed; right:22px; bottom:22px; z-index:90;
+    width:58px; height:58px; border-radius:50%;
+    background:#25D366; color:#fff;
+    display:flex; align-items:center; justify-content:center;
+    box-shadow:0 10px 26px -6px rgba(0,0,0,.5);
+    transition:transform .2s ease, box-shadow .2s ease;
+  }
+  .wa-float:hover{transform:translateY(-2px) scale(1.05); box-shadow:0 14px 30px -6px rgba(0,0,0,.55);}
+  .wa-float svg{width:30px; height:30px;}
+  @media (max-width:620px){
+    .wa-float{width:52px; height:52px; right:16px; bottom:16px;}
+    .wa-float svg{width:26px; height:26px;}
+  }
+
   [data-page]{display:none;}
   [data-page].active{display:block;}
 
@@ -917,6 +932,9 @@
   </div>
 </footer>
 
+<a class="wa-float" href="https://wa.me/34643321518?text=Hola%2C%20quiero%20m%C3%A1s%20informaci%C3%B3n%20sobre%20Aleia%20Solutions" target="_blank" rel="noopener noreferrer" aria-label="Contactar por WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.198.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-1.746-.873-2.888-1.562-4.036-3.541-.305-.526.305-.489.874-1.628.099-.199.05-.371-.05-.52-.099-.149-.669-1.611-.916-2.206-.247-.598-.471-.51-.644-.52-.174-.008-.372-.01-.571-.01-.198 0-.52.075-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.876 1.213 3.074.149.198 2.05 3.16 4.966 4.294 2.917 1.134 2.917.755 3.437.709.52-.049 1.758-.719 2.006-1.413.248-.694.248-1.288.173-1.412-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.121.554 4.115 1.519 5.844L0 24l6.373-1.548A11.94 11.94 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.821a9.795 9.795 0 0 1-4.994-1.382l-.359-.213-3.712.903.907-3.656-.235-.375A9.788 9.788 0 0 1 2.184 12c0-5.42 4.396-9.816 9.816-9.816 5.421 0 9.817 4.396 9.817 9.816 0 5.421-4.397 9.821-9.817 9.821z"/></svg>
+</a>
 <div class="toast" id="toast">¡Gracias! Hemos recibido tu solicitud.</div>
 
 <script>
@@ -1092,6 +1110,7 @@
   }
   initPhoneFields();
 </script>
+
 
 </body>
 </html>
